@@ -7,17 +7,24 @@ export const CounterApp = () => {
 
   useEffect(() => {
 
-    // Cambiar tamaño a la imagen con useeffect
     const img = document.getElementById('hyoga-img');
 
     if (count >= 100) {
-      img.style.filter = 'brightness(1)';
+      img.classList.remove('Inactive');
+      img.classList.add('Active')
+    } else {
+      img.classList.remove('Active');
+      img.classList.add('Inactive')
     }
-    
   },[count]);  
 
-  const handleShowConsole = () => {
-    setCount(count+10);
+  const handleShowCount = (e) => {
+
+    if (e.target.id === 'btnAdd') {
+      setCount(count + 10);
+    } else {
+      setCount(count - 10);
+    }
   }
   
   return(
@@ -26,9 +33,10 @@ export const CounterApp = () => {
       <hr />
       <p>{count}</p>
       <figure>
-        <img id="hyoga-img" src={hyoga} alt="Imagen de prueba"/>
+        <img className="" id="hyoga-img" src={hyoga} alt="Imagen de prueba"/>
       </figure>
-      <button onClick={handleShowConsole}>Click Me</button>    
+      <button id="btnAdd" onClick={handleShowCount}>+</button>    
+      <button id="btnSubstract" onClick={handleShowCount}>-</button>    
     </div>
   );
 };
